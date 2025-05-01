@@ -30,10 +30,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-CSRF_TRUSTED_ORIGINS = ["https://rtt-production.up.railway.app"], # Asegúrate de incluir tanto HTTPS como HTTP si es necesario
-
-
-# Application definition
+CSRF_TRUSTED_ORIGINS = [
+    'https://rtt-production.up.railway.app',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
