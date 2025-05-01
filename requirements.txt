@@ -3,4 +3,4 @@ pillow
 gunicorn
 whitenoise
 channels
-mysqlclient
+mysqlclient==2.2.7 
