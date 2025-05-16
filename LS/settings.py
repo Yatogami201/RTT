@@ -94,11 +94,11 @@ WSGI_APPLICATION = 'LS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'vendedor',
-        'USER': 'root',
-        'PASSWORD': 'syn200314',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': 'railway',  # Nombre de la base de datos
+        'USER': 'root',     # Usuario de la base de datos
+        'PASSWORD': 'ncGHCBFglxzbJdRUiHOUOKoKkikhlprU',  # Contraseña
+        'HOST': 'ballast.proxy.rlwy.net',  # Host público de Railway
+        'PORT': '57438',    # Puerto proporcionado por Railway
     }
 }
 
