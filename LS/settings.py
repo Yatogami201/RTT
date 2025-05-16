@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+import pymysql
+pymysql.install_as_MySQLdb()
 
 HUGGINGFACE_API_KEY = "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"
 DEEPAI_API_KEY = "991ee198-7927-41c0-9c2b-b7cb00069fc4"
