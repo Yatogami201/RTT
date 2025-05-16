@@ -12,11 +12,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-import pymysql
-pymysql.install_as_MySQLdb()
+
+HUGGINGFACE_API_KEY = "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"
+DEEPAI_API_KEY = "991ee198-7927-41c0-9c2b-b7cb00069fc4"
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,11 +28,10 @@ SECRET_KEY = 'django-insecure-2==gbweqvim^v^u0o^$gp-)z!153_0h8-)y3f68e)4#spar+)^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = []
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://rtt-production.up.railway.app',
-]
+
+# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -48,11 +47,11 @@ INSTALLED_APPS = [
     'channels',
     'chat',
     'Vendedor',
+    'vendedores'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -95,14 +94,14 @@ WSGI_APPLICATION = 'LS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'railway',  # Nombre de la base de datos
-        'USER': 'root',     # Usuario de la base de datos
-        'PASSWORD': 'ncGHCBFglxzbJdRUiHOUOKoKkikhlprU',  # Contraseña
-        'HOST': 'ballast.proxy.rlwy.net',  # Host público de Railway
-        'PORT': '57438',    # Puerto proporcionado por Railway
+        'NAME': 'vendedor',
+        'USER': 'root',
+        'PASSWORD': 'syn200314',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
- 
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -143,8 +142,6 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'landing/static'),
 ]
-
-STATICSTORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -153,4 +150,4 @@ ASGI_APPLICATION = 'LS.asgi.application'
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-
+MEDIA_ROOT = BASE_DIR / 'media'

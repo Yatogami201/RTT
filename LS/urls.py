@@ -19,6 +19,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from login.views import login_view, home_view_vendedor, home_view_cliente, register  
+from search.views import search_products
 from Vendedor import views
 
 urlpatterns = [
@@ -27,13 +28,13 @@ urlpatterns = [
     path('search/', include('search.urls')), 
     path("recomendaciones/", include("chat_recomendaciones.urls")),
     path('login/', login_view, name='login'),
-    path("vendedor/", home_view_vendedor, name="vendedor"),
     path("cliente/", home_view_cliente, name="cliente"),
-    path('register/', register, name='register'), 
+    path('register/', register, name='register'),
     path('', views.inicio, name='inicio'),
-    path('vendedor/', views.perfil_view, name='perfil'),
     path('chat/', include('chat.urls')),  
-]
+    path('vendedor/', include('vendedores.urls')),
+    path('buscar/', search_products, name='search_products'),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # Servir archivos de la carpeta media en desarrollo
 if settings.DEBUG:

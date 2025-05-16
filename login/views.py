@@ -26,7 +26,7 @@ def login_view(request):
             if user_profile.user_type == "cliente":
                 return redirect("cliente")  
             elif user_profile.user_type == "vendedor":
-                return redirect("vendedor")
+                return redirect("lista_publicaciones")
         else:
             messages.error(request, "Usuario o contraseña incorrectos")
 
