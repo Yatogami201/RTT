@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Eliminar Publicación</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #6a7680;
+            margin: 0;
+            padding-top: 60px;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+        .navbar {
+            background: #343a40;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+        .navbar-brand {
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .home-button {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        .home-button:hover {
+            transform: scale(1.1);
+            color: #ddd;
+        }
+        .delete-container {
+            background: rgb(73, 84, 89);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgb(0, 0, 0);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a class="navbar-brand">JSEAFIT</a>
+        <a href="/" class="home-button" title="Volver al inicio">
+            <i class="bi bi-house-door-fill"></i>
+        </a>
+    </nav>
+
+    <div class="delete-container">
+        <h2>¿Eliminar esta publicación?</h2>
+        <p><strong>{{ publicacion.titulo }}</strong></p>
+        {% if publicacion.imagen %}
+            <img src="{{ publicacion.imagen.url }}" alt="Imagen de la publicación" class="img-fluid mb-3" style="max-height: 200px; border-radius: 8px;">
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+            <a href="{% url 'lista_publicaciones' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>

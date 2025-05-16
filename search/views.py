@@ -3,22 +3,32 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from .models import Search
+from vendedores.models import Publicacion
 
 def search_products(request):
     query = request.GET.get('q', '').strip()
     category = request.GET.get('category', '').strip()
-    
-    products = Search.objects.all()
+
+    # Productos desde modelo Search (productos del sistema)
+    search_products = Search.objects.all()
     if query:
-        products = products.filter(name__icontains=query)
+        search_products = search_products.filter(name__icontains=query)
     if category:
-        products = products.filter(category__icontains=category)
-    
+        search_products = search_products.filter(category__icontains=category)
+
+    # Publicaciones desde modelo Publicacion (usuarios/vendedores)
+    post_products = Publicacion.objects.all()
+    if query:
+        post_products = post_products.filter(titulo__icontains=query)
+    if category:
+        post_products = post_products.filter(categoria__icontains=category)
+
     context = {
-        'products': products,
+        'search_products': search_products,
+        'post_products': post_products,
         'query': query,
         'category': category,
-        'no_results': not products.exists()
+        'no_results': not search_products.exists() and not post_products.exists()
     }
     return render(request, 'search_results.html', context)
 

@@ -1,270 +1,297 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Buscar Productos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #6a7680;
-            margin: 0;
-            padding-top: 60px;
-        }
+    {% load static %}
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Buscar Productos</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+        <style>
+            body {
+                font-family: 'Poppins', sans-serif;
+                background-color: #6a7680;
+                margin: 0;
+                padding-top: 60px;
+            }
 
-        .navbar {
-            background: #343a40;
-            padding: 10px 20px;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 60px;
-        }
+            .navbar {
+                background: #343a40;
+                padding: 10px 20px;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 1000;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 60px;
+            }
 
-        .navbar-brand {
-            color: white;
-            font-size: 1.5em;
-            font-weight: bold;
-        }
+            .navbar-brand {
+                color: white;
+                font-size: 1.5em;
+                font-weight: bold;
+            }
 
-        .home-button {
-            color: white;
-            font-size: 1.5rem;
-            transition: transform 0.3s;
-        }
+            .home-button {
+                color: white;
+                font-size: 1.5rem;
+                transition: transform 0.3s;
+            }
 
-        .home-button:hover {
-            transform: scale(1.1);
-            color: #ddd;
-        }
+            .home-button:hover {
+                transform: scale(1.1);
+                color: #ddd;
+            }
 
-        .container {
-            background: rgb(73, 84, 89);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgb(0, 0, 0);
-            margin-top: 30px;
-            color: white;
-        }
+            .container {
+                background: rgb(73, 84, 89);
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgb(0, 0, 0);
+                margin-top: 30px;
+                color: white;
+            }
 
-        h2 {
-            color: white;
-            margin-bottom: 25px;
-        }
+            h2 {
+                color: white;
+                margin-bottom: 25px;
+            }
 
-        .product-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
+            .product-img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+                border-radius: 5px;
+            }
 
-        .card {
-            background: #495459;
-            border: none;
-            border-radius: 10px;
-            transition: transform 0.3s;
-            margin-bottom: 20px;
-        }
+            .card {
+                background: #495459;
+                border: none;
+                border-radius: 10px;
+                transition: transform 0.3s;
+                margin-bottom: 20px;
+            }
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
+            .card:hover {
+                transform: translateY(-5px);
+            }
 
-        .card-body {
-            color: white;
-        }
+            .card-body {
+                color: white;
+            }
 
-        .btn-primary {
-            background-color: #1d2021;
-            border: none;
-        }
+            .btn-primary {
+                background-color: #1d2021;
+                border: none;
+            }
 
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
 
-        .form-control, .form-select {
-            background-color: #495459;
-            border: 1px solid #6a7680;
-            color: white;
-        }
+            .form-control, .form-select {
+                background-color: #495459;
+                border: 1px solid #6a7680;
+                color: white;
+            }
 
-        .form-control:focus {
-            background-color: #495459;
-            color: white;
-        }
+            .form-control:focus {
+                background-color: #495459;
+                color: white;
+            }
 
-        #chatBox {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 300px;
-            background: #495459;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            display: none;
-            color: white;
-            border: 1px solid #6a7680;
-        }
+            #chatBox {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 300px;
+                background: #495459;
+                padding: 15px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                display: none;
+                color: white;
+                border: 1px solid #6a7680;
+            }
 
-        #openChat {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #1d2021;
-            color: white;
-            border: none;
-            padding: 12px 15px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-            transition: all 0.3s;
-            z-index: 1000;
-        }
+            #openChat {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: #1d2021;
+                color: white;
+                border: none;
+                padding: 12px 15px;
+                border-radius: 50%;
+                cursor: pointer;
+                font-size: 1.2rem;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+                transition: all 0.3s;
+                z-index: 1000;
+            }
 
-        #openChat:hover {
-            background: #0056b3;
-            transform: scale(1.1);
-        }
+            #openChat:hover {
+                background: #0056b3;
+                transform: scale(1.1);
+            }
 
-        .alert {
-            border-radius: 5px;
-        }
-    </style>
-</head>
-<body>
+            .alert {
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
 
-    <nav class="navbar">
-        <a class="navbar-brand">JSEAFIT</a>
-        <a href="/" class="home-button" title="Volver al inicio">
-            <i class="bi bi-house-door-fill"></i>
-        </a>
-    </nav>
+        <nav class="navbar">
+            <a class="navbar-brand">JSEAFIT</a>
+            <a href="/" class="home-button" title="Volver al inicio">
+                <i class="bi bi-house-door-fill"></i>
+            </a>
+        </nav>
 
-    <div class="container">
-        <h2 class="text-center">🔍 Buscador de Productos</h2>
+        <div class="container">
+            <h2 class="text-center">🔍 Buscador de Productos</h2>
 
-        <form method="GET" class="row g-3">
-            <div class="col-md-5">
-                <input type="text" name="q" class="form-control" placeholder="Buscar por nombre..." value="{{ query }}">
-            </div>
-            <div class="col-md-5">
-                <input type="text" name="category" class="form-control" placeholder="Categoría (opcional)" value="{{ category }}">
-            </div>
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-primary w-100">Buscar</button>
-            </div>
-        </form>
-
-        <hr style="border-color: #6a7680;">
-
-        {% if no_results %}
-            <div class="alert alert-warning text-center" role="alert">
-                ❌ No se encontraron productos con ese criterio.
-            </div>
-        {% else %}
-            <div class="row mt-4">
-                {% for product in products %}
-                <div class="col-md-4">
-                    <div class="card shadow-sm">
-                        {% if product.images %}
-                            <img src="{{ product.images.0 }}" class="product-img" alt="{{ product.name }}">
-                        {% else %}
-                            <img src="{% static 'img/default.jpg' %}" class="product-img" alt="Imagen no disponible">
-                        {% endif %}
-                        <div class="card-body">
-                            <h5 class="card-title">{{ product.name }}</h5>
-                            <p class="card-text"><strong>Categoría:</strong> {{ product.category }}</p>
-                            <p class="card-text"><strong>Precio:</strong> ${{ product.price }}</p>
-                        </div>
-                    </div>
+            <form method="GET" class="row g-3">
+                <div class="col-md-5">
+                    <input type="text" name="q" class="form-control" placeholder="Buscar por nombre..." value="{{ query }}">
                 </div>
-                {% endfor %}
+                <div class="col-md-5">
+                    <input type="text" name="category" class="form-control" placeholder="Categoría (opcional)" value="{{ category }}">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Buscar</button>
+                </div>
+            </form>
+
+            <hr style="border-color: #6a7680;">
+
+            {% if no_results %}
+                <div class="alert alert-warning text-center" role="alert">
+                    ❌ No se encontraron productos con ese criterio.
+                </div>
+            {% else %}
+    <div class="row mt-4">
+        <h4 class="text-white mb-3">🗂️ Productos del sistema</h4>
+        {% for product in search_products %}
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                {% if product.images %}
+                    <img src="{{ product.images.0 }}" class="product-img" alt="{{ product.name }}">
+                {% else %}
+                    <img src="{% static 'img/default.jpg' %}" class="product-img" alt="Imagen no disponible">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text"><strong>Categoría:</strong> {{ product.category }}</p>
+                    <p class="card-text"><strong>Precio:</strong> ${{ product.price }}</p>
+                </div>
             </div>
-        {% endif %}
+        </div>
+        {% empty %}
+            <p class="text-white">No se encontraron productos del sistema.</p>
+        {% endfor %}
     </div>
 
-    <button id="openChat">💬</button>
-    <div id="chatBox">
-        <h5 class="mb-3">Asistente de Recomendaciones</h5>
-        <div class="input-group mb-3">
-            <input type="text" id="userInput" class="form-control" placeholder="Ej: 'Necesito un cuaderno para la universidad'">
-            <button class="btn btn-primary" onclick="enviarDescripcion()">Enviar</button>
+    <hr class="my-4" style="border-color: #6a7680;">
+
+    <div class="row mt-4">
+        <h4 class="text-white mb-3">📢 Publicaciones de usuarios</h4>
+        {% for post in post_products %}
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                {% if post.imagen %}
+                    <img src="{{ post.imagen.url }}" class="product-img" alt="{{ post.titulo }}">
+                {% else %}
+                    <img src="{% static 'img/default.jpg' %}" class="product-img" alt="Imagen no disponible">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.titulo }}</h5>
+                    <p class="card-text"><strong>Categoría:</strong> {{ post.categoria }}</p>
+                    <p class="card-text"><strong>Precio:</strong> ${{ post.precio }}</p>
+                </div>
+            </div>
         </div>
-        <div id="response" class="mt-3">
-            <!-- Aquí aparecerán las respuestas -->
-        </div>
+        {% empty %}
+            <p class="text-white">No se encontraron publicaciones de usuarios.</p>
+        {% endfor %}
     </div>
+{% endif %}
+        </div>
 
-    <script>
-        // Chat toggle function
-        document.getElementById("openChat").addEventListener("click", function() {
-            var chatBox = document.getElementById("chatBox");
-            chatBox.style.display = (chatBox.style.display === "none") ? "block" : "none";
-        });
+        <button id="openChat">💬</button>
+        <div id="chatBox">
+            <h5 class="mb-3">Asistente de Recomendaciones</h5>
+            <div class="input-group mb-3">
+                <input type="text" id="userInput" class="form-control" placeholder="Ej: 'Necesito un cuaderno para la universidad'">
+                <button class="btn btn-primary" onclick="enviarDescripcion()">Enviar</button>
+            </div>
+            <div id="response" class="mt-3">
+                <!-- Aquí aparecerán las respuestas -->
+            </div>
+        </div>
 
-        async function enviarDescripcion() {
-            const descripcion = document.getElementById("userInput").value.trim();
-            const responseDiv = document.getElementById("response");
-            
-            if (!descripcion) {
-                responseDiv.innerHTML = '<div class="alert alert-warning">Por favor ingresa una descripción</div>';
-                return;
-            }
+        <script>
+            // Chat toggle function
+            document.getElementById("openChat").addEventListener("click", function() {
+                var chatBox = document.getElementById("chatBox");
+                chatBox.style.display = (chatBox.style.display === "none") ? "block" : "none";
+            });
 
-            responseDiv.innerHTML = '<div class="text-center"><div class="spinner-border text-primary"></div><p>Generando recomendación...</p></div>';
-
-            try {
-                const response = await fetch("/recomendaciones/chat/", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRFToken": getCookie("csrftoken")
-                    },
-                    body: JSON.stringify({descripcion: descripcion})
-                });
-
-                const data = await response.json();
+            async function enviarDescripcion() {
+                const descripcion = document.getElementById("userInput").value.trim();
+                const responseDiv = document.getElementById("response");
                 
-                let htmlContent = `<p><strong>Recomendación:</strong> ${data.producto || "No se pudo generar recomendación"}</p>`;
-                
-                if (data.imagen) {
-                    htmlContent += `<img src="data:image/png;base64,${data.imagen}" alt="Imagen generada" class="img-fluid mt-2 rounded">`;
+                if (!descripcion) {
+                    responseDiv.innerHTML = '<div class="alert alert-warning">Por favor ingresa una descripción</div>';
+                    return;
                 }
-                
-                responseDiv.innerHTML = htmlContent;
-                
-            } catch (error) {
-                console.error("Error:", error);
-                responseDiv.innerHTML = '<div class="alert alert-danger">Error al conectar con el servicio</div>';
-            }
-        }
 
-        // Función para obtener el token CSRF
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                const cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i].trim();
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
+                responseDiv.innerHTML = '<div class="text-center"><div class="spinner-border text-primary"></div><p>Generando recomendación...</p></div>';
+
+                try {
+                    const response = await fetch("/recomendaciones/chat/", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRFToken": getCookie("csrftoken")
+                        },
+                        body: JSON.stringify({descripcion: descripcion})
+                    });
+
+                    const data = await response.json();
+                    
+                    let htmlContent = `<p><strong>Recomendación:</strong> ${data.producto || "No se pudo generar recomendación"}</p>`;
+                    
+                    if (data.imagen) {
+                        htmlContent += `<img src="data:image/png;base64,${data.imagen}" alt="Imagen generada" class="img-fluid mt-2 rounded">`;
+                    }
+                    
+                    responseDiv.innerHTML = htmlContent;
+                    
+                } catch (error) {
+                    console.error("Error:", error);
+                    responseDiv.innerHTML = '<div class="alert alert-danger">Error al conectar con el servicio</div>';
+                }
+            }
+
+            // Función para obtener el token CSRF
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
                     }
                 }
+                return cookieValue;
             }
-            return cookieValue;
-        }
-    </script>
-</body>
-</html>
+        </script>
+    </body>
+    </html>
